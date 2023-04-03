@@ -1,0 +1,64 @@
+.jwt-parse-tips {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.jwt-parse-tips-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.jwt-parse-container {
+    display: flex;
+    align-items: space-between;
+    width: 100%;
+    height: 50vh;
+}
+
+.jwt-parse-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.jwt-parse-left textarea {
+    flex-grow: 1;
+    border: 1px solid #dedede;
+}
+
+.jwt-parse-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.jwt-parse-result {
+    border: 1px solid #dedede;
+    flex-grow: 1;
+}
+
+.jwt-header {
+    height: 60px;
+    border: 1px solid #dedede;
+    border-left: none;
+    border-right: none;
+}
+
+.jwt-payload {
+    flex-grow: 1;
+    border: 1px solid #dedede;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+/* 高亮显示的样式 */
+.json-key { color: brown; }
+.json-string { color: blue; }
+.json-number { color: purple; }
+.json-boolean { color: green; }
+.json-null { color: gray; }

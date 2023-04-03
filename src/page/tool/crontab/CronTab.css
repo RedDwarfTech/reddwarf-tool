@@ -8,3 +8,21 @@
 .exe-time {
     margin-bottom: 10px;
 }
+
+.cron-container {
+    display:flex;
+    flex-direction: column;
+}
+
+.cron-container div{
+    margin-top: 30px;
+}
+
+.cron-expr input {
+    width: 200px;
+    height: 25px;
+}
+
+.cron-expr Button{
+    margin-left: 20px;
+}

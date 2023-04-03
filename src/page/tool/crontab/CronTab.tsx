@@ -54,14 +54,14 @@ const CronTab: React.FC = (props) => {
     }
 
     return (
-        <div>
+        <div className="cron-container">
             <h4>crontab执行时间计算</h4>
             <div>类型：
                 <Checkbox onClick={()=>handleOnCheck("linux")} checked ={checkedValue === "linux"?true:false}>Linux</Checkbox>
                 <Checkbox onClick={()=>handleOnCheck("spring")} checked ={checkedValue === "spring"?true:false}>Java(Spring)</Checkbox>
                 <Checkbox onClick={()=>handleOnCheck("quartz")} checked ={checkedValue === "quartz"?true:false}>Java(Quartz)</Checkbox>
             </div>
-            <div>CRON表达式：
+            <div className="cron-expr">CRON表达式：
                 <input onChange={(e:any)=>handleInputChange(e)}></input>
                 <Button type="primary" onClick={() => exeCheck()}>查看执行时间</Button>
             </div>

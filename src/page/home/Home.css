@@ -1,0 +1,25 @@
+.tool-container {
+    display:flex;
+    flex-direction: left;
+    height: 100vh;
+}
+
+.left {
+    width:10%
+}
+
+.center {
+    width: 80%;
+    display: flex;
+}
+
+.tool-card {
+    width: 200px;
+    height: 150px;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.right {
+    width: 10%;
+}

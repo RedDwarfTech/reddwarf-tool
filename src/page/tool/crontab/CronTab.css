@@ -1,0 +1,10 @@
+.exe-result-box {
+    border: 1px solid #ccc;
+    border-width: 1px 1px 1px 1px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.exe-time {
+    margin-bottom: 10px;
+}

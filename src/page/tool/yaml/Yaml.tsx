@@ -1,4 +1,4 @@
-import { Checkbox, Input } from "antd";
+import { Breadcrumb, Checkbox, Input } from "antd";
 import { useState } from "react";
 import './Yaml.css'
 import { JsonViewer } from '@textea/json-viewer';
@@ -40,6 +40,16 @@ const Yaml: React.FC = (props) => {
 
     return (
         <div className="yaml-container">
+            <Breadcrumb items={[
+                    {
+                        title: '首页',
+                        href: '/'
+                    },
+                    {
+                        title: 'Yaml转换',
+                    }
+                ]}>
+            </Breadcrumb>
             <h3>Yaml转换</h3>
             <div className="jwt-parse-tips jwt-parse-tips-danger"><strong>提示：</strong>Yaml及其他相互转换的所有步骤都在客户端进行，请放心使用。</div>
             <div className="yaml-parse-container">

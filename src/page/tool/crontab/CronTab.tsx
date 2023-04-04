@@ -61,7 +61,7 @@ const CronTab: React.FC = (props) => {
                         href: '/'
                     },
                     {
-                        title: 'JCrontab执行时间计算',
+                        title: 'Crontab执行时间计算',
                     }
                 ]}>
             </Breadcrumb>

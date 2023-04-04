@@ -21,49 +21,17 @@
     flex-direction: column;
 }
 
-.jwt-parse-src {
+.json-parse-src {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 30vh;
+    height: 55vh;
     margin-top: 20px;
 }
 
-.jwt-parse-src textarea {
+.json-parse-src textarea {
     border: 1px solid #dedede;
     flex-grow: 1;
-}
-
-.jwt-parse-dist {
-    display: flex;
-    flex-direction: column;
-    margin-left: 0px;
-    height: 30vh;
-}
-
-.parse-result {
-    display: flex;
-    flex-direction: column;
-}
-
-.jwt-parse-result {
-    border: 1px solid #dedede;
-    flex-grow: 1;
-}
-
-.jwt-header {
-    height: 60px;
-    border: 1px solid #dedede;
-    border-left: none;
-    border-right: none;
-}
-
-.jwt-payload {
-    flex-grow: 1;
-    border: 1px solid #dedede;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
 }
 
 /* 高亮显示的样式 */

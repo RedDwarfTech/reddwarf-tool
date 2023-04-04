@@ -22,21 +22,34 @@ const Home: React.FC = (props) => {
         setShowPage(menu);
     }
 
+    const gridStyle: React.CSSProperties = {
+        width: '12%',
+        textAlign: 'center',
+        marginLeft: '20px',
+        marginTop: '20px',
+    };
+
     const renderContainer = () => {
         if (showPage === 'tools') {
             return (
-                <div className="center">
-                    <Card className="tool-card" title="JWT解析" onClick={(e) => handleToolTitleClick(e, "jwt")}>
+                <Card className="tool-card" title="小工具">
+                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "jwt")}>
+                        <div className="tool-title">JWT解析</div>
                         <div>查看JSON Web Tokens的内容</div>
-                    </Card>
-                    <Card className="tool-card" title="crontab时间计算" onClick={(e) => handleToolTitleClick(e, "crontab")}>
+                    </Card.Grid>
+                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "crontab")}>
+                        <div className="tool-title">Crontab时间计算</div>
                         <div>cron表达式执行时间计算</div>
-                    </Card>
-                    <Card className="tool-card" title="Yaml工具" onClick={(e) => handleToolTitleClick(e, "yaml")}>
-                    </Card>
-                    <Card className="tool-card" title="Json工具" onClick={(e) => handleToolTitleClick(e, "json")}>
-                    </Card>
-                </div>
+                    </Card.Grid>
+                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "yaml")}>
+                        <div className="tool-title">Yaml工具</div>
+                        <div></div>
+                    </Card.Grid>
+                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "json")}>
+                        <div className="tool-title">Json工具</div>
+                        <div></div>
+                    </Card.Grid>
+                </Card>
             );
         } else if (showPage === 'crontab') {
             return (<CronTab></CronTab>);

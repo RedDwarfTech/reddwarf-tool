@@ -5,7 +5,9 @@ import { useState } from "react";
 import About from "../about/About";
 import AppIcon from "../tool/appicon/AppIcon";
 import CronTab from "../tool/crontab/CronTab";
+import JsonTool from "../tool/json/JsonTool";
 import JwtParse from "../tool/jwt/JwtParse";
+import Yaml from "../tool/yaml/Yaml";
 import "./Home.css";
 
 const Home: React.FC = (props) => {
@@ -30,9 +32,10 @@ const Home: React.FC = (props) => {
                     <Card className="tool-card" title="crontab时间计算" onClick={(e) => handleToolTitleClick(e, "crontab")}>
                         <div>cron表达式执行时间计算</div>
                     </Card>
-                    <Card className="tool-card" title="app icon在线制作" onClick={(e) => handleToolTitleClick(e, "appicon")}>
+                    <Card className="tool-card" title="Yaml工具" onClick={(e) => handleToolTitleClick(e, "yaml")}>
                     </Card>
-                    
+                    <Card className="tool-card" title="Json工具" onClick={(e) => handleToolTitleClick(e, "json")}>
+                    </Card>
                 </div>
             );
         } else if (showPage === 'crontab') {
@@ -43,7 +46,11 @@ const Home: React.FC = (props) => {
             return (<JwtParse></JwtParse>);
         } else if(showPage === "about"){
             return (<About></About>);
-        } else {
+        } else if(showPage === 'yaml') {
+            return (<Yaml></Yaml>);
+        } else if (showPage === 'json'){
+            return (<JsonTool></JsonTool>);
+        }else {
             return (<div></div>);
         }
     }
@@ -54,7 +61,9 @@ const Home: React.FC = (props) => {
             <ToolHeader onMenuClick={(value)=>onMenuClick(value.toString())}></ToolHeader>
             <div className="tool-container">
                 <div className="left"></div>
-                {renderContainer()}
+                <div className="center">
+                    {renderContainer()}
+                </div>
                 <div className="right"></div>
             </div>
         </div>

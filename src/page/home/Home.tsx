@@ -1,6 +1,6 @@
 import ToolHeader from "@/component/header/ToolHeader";
 import withConnect from "@/redux/hoc/withConnect";
-import { Row, Col, Card } from "antd";
+import { Row, Col, Card, Breadcrumb } from "antd";
 import { useState } from "react";
 import About from "../about/About";
 import AppIcon from "../tool/appicon/AppIcon";
@@ -18,7 +18,7 @@ const Home: React.FC = (props) => {
         setShowPage(tab);
     }
 
-    const onMenuClick =(menu:string)=> {
+    const onMenuClick = (menu: string) => {
         setShowPage(menu);
     }
 
@@ -44,13 +44,13 @@ const Home: React.FC = (props) => {
             return (<AppIcon></AppIcon>);
         } else if (showPage === 'jwt') {
             return (<JwtParse></JwtParse>);
-        } else if(showPage === "about"){
+        } else if (showPage === "about") {
             return (<About></About>);
-        } else if(showPage === 'yaml') {
+        } else if (showPage === 'yaml') {
             return (<Yaml></Yaml>);
-        } else if (showPage === 'json'){
+        } else if (showPage === 'json') {
             return (<JsonTool></JsonTool>);
-        }else {
+        } else {
             return (<div></div>);
         }
     }
@@ -58,7 +58,7 @@ const Home: React.FC = (props) => {
 
     return (
         <div>
-            <ToolHeader onMenuClick={(value)=>onMenuClick(value.toString())}></ToolHeader>
+            <ToolHeader onMenuClick={(value) => onMenuClick(value.toString())}></ToolHeader>
             <div className="tool-container">
                 <div className="left"></div>
                 <div className="center">
@@ -67,6 +67,7 @@ const Home: React.FC = (props) => {
                 <div className="right"></div>
             </div>
         </div>
+
     );
 }
 

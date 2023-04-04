@@ -11,16 +11,39 @@ const JwtParse: React.FC = (props) => {
         setInputValue(e.target.value);
     };
 
-    const parseJwt = (token: string) => {
+    const parseJwtPayload = (token: string) => {
         var base64Payload = token.split('.')[1];
         var payload = Buffer.from(base64Payload, 'base64');
         return JSON.parse(payload.toString());
     }
 
-    const renderParsed = () => {
-        if (inputValue && inputValue.length > 0 && inputValue.split('.').length > 1) {
-            var payload = parseJwt(inputValue);
-            return (<div className="jwt-payload"><JsonViewer value={payload} /></div>);
+    const parseJwtHeader = (token: string) => {
+        var base64Payload = token.split('.')[0];
+        var payload = Buffer.from(base64Payload, 'base64');
+        return JSON.parse(payload.toString());
+    }
+
+    const renderParsedPayload = () => {
+        try {
+            if (inputValue && inputValue.length > 0 && inputValue.split('.').length > 1) {
+                var payload = parseJwtPayload(inputValue);
+                debugger
+                return (<div className="jwt-payload"><JsonViewer value={payload} /></div>);
+            }
+        } catch (e) {
+
+        }
+        return (<div></div>);
+    }
+
+    const renderParsedHeader = () => {
+        try {
+            if (inputValue && inputValue.length > 0 && inputValue.split('.').length > 0) {
+                var header = parseJwtHeader(inputValue);
+                return (<div className="jwt-header-content"><JsonViewer value={header} /></div>);
+            }
+        } catch (e) {
+
         }
         return (<div></div>);
     }
@@ -42,9 +65,11 @@ const JwtParse: React.FC = (props) => {
                     <div style={{ fontSize: '18px' }}>Decoded</div>
                     <div className="jwt-parse-result">
                         <div>Header</div>
-                        <div className="jwt-header"></div>
+                        <div className="jwt-header">
+                            {renderParsedHeader()}
+                        </div>
                         <div>Payload</div>
-                        {renderParsed()}
+                        {renderParsedPayload()}
                     </div>
                 </div>
             </div>

@@ -23,6 +23,7 @@
     "js-wheel": "https://github.com/jiangxiaoqiang/js-wheel.git",
     "jsonwebtoken": "^9.0.0",
     "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",

@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@textea/json-viewer": "^2.16.2",
+    "@types/highlight.js": "^10.1.0",
     "@types/jest": "^27.5.2",
     "@types/js-yaml": "^4.0.5",
     "@types/node": "^16.18.23",
@@ -20,6 +21,7 @@
     "cron-parser": "^4.8.1",
     "customize-cra": "^1.0.0",
     "dayjs": "^1.11.7",
+    "highlight.js": "^11.7.0",
     "js-wheel": "https://github.com/jiangxiaoqiang/js-wheel.git",
     "jsonwebtoken": "^9.0.0",
     "react": "^18.2.0",
@@ -52,8 +54,10 @@
     ]
   },
   "devDependencies": {
+    "@types/js-beautify": "^1.13.3",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/redux-logger": "^3.0.9",
-    "@types/uuid": "^9.0.1"
+    "@types/uuid": "^9.0.1",
+    "js-beautify": "^1.14.7"
   }
 }

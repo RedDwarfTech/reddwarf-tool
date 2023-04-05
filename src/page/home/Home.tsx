@@ -43,11 +43,11 @@ const Home: React.FC = (props) => {
                     </Card.Grid>
                     <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "yaml")}>
                         <div className="tool-title">Yaml工具</div>
-                        <div></div>
+                        <div>Yaml与其他格式的互转</div>
                     </Card.Grid>
                     <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "json")}>
                         <div className="tool-title">Json工具</div>
-                        <div></div>
+                        <div>Json格式化校验</div>
                     </Card.Grid>
                 </Card>
             );

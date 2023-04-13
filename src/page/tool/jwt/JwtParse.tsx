@@ -84,7 +84,6 @@ const JwtParse: React.FC = (props) => {
     const onChange = (e:any) => {
         try{
             const fmt = TimeUtils.getFormattedTime(Number(e.target.value));
-            console.log(fmt); 
             setFormattedTime(fmt);
         }catch(e){
 

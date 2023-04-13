@@ -85,7 +85,7 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
       loadCurrentUser();
       setIsLoggedIn(true);
     }
-    return (<Button name='aiLoginBtn' onClick={userLogin}>登录</Button>);
+    //return (<Button name='aiLoginBtn' onClick={userLogin}>登录</Button>);
   }
 
   const loadCurrentUser = () => {

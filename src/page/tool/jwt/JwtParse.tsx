@@ -1,11 +1,13 @@
-import { Breadcrumb, Input } from "antd";
+import { Breadcrumb, Input, Image } from "antd";
 import { useState } from "react";
 import './JwtParse.css'
-import { JsonViewer } from '@textea/json-viewer'
+import { JsonViewer,createDataType } from '@textea/json-viewer';
+import { TimeUtils } from "js-wheel";
 
 const JwtParse: React.FC = (props) => {
     var Buffer = require('buffer/').Buffer
     const [inputValue, setInputValue] = useState<string>('');
+    const [formattedTime, setFormattedTime] = useState<string>('');
 
     const handleChange = (e: any) => {
         setInputValue(e.target.value);
@@ -41,7 +43,7 @@ const JwtParse: React.FC = (props) => {
         return (<div></div>);
     }
 
-    const renderSystem =()=>{
+    const renderSystem = () => {
         try {
             if (inputValue && inputValue.length > 0 && inputValue.split('.').length > 2) {
                 var payload = parseJwtSys(inputValue);
@@ -57,7 +59,21 @@ const JwtParse: React.FC = (props) => {
         try {
             if (inputValue && inputValue.length > 0 && inputValue.split('.').length > 0) {
                 var header = parseJwtHeader(inputValue);
-                return (<div className="jwt-header-content"><JsonViewer rootName={false} value={header} /></div>);
+                return (
+                <div className="jwt-header-content">
+                    <JsonViewer rootName={false} 
+                    valueTypes={[
+                        createDataType(
+                            (value,path) => {
+                                return false;
+                            },
+                            (props) => {
+                                return(<div></div>);
+                            }
+                          )
+                    ]}
+                    value={header} />
+                </div>);
             }
         } catch (e) {
 
@@ -65,17 +81,27 @@ const JwtParse: React.FC = (props) => {
         return (<div></div>);
     }
 
+    const onChange = (e:any) => {
+        try{
+            const fmt = TimeUtils.getFormattedTime(Number(e.target.value));
+            console.log(fmt); 
+            setFormattedTime(fmt);
+        }catch(e){
+
+        }
+    }
+
     return (
         <div>
             <Breadcrumb items={[
-                    {
-                        title: '首页',
-                        href: '/'
-                    },
-                    {
-                        title: 'JWT解析',
-                    }
-                ]}>
+                {
+                    title: '首页',
+                    href: '/'
+                },
+                {
+                    title: 'JWT解析',
+                }
+            ]}>
             </Breadcrumb>
             <h3>JSON Web Tokens (JWT) 在线解密</h3>
             <div className="jwt-parse-tips jwt-parse-tips-danger"><strong>提示：</strong> JWT是目前最流行的跨域认证解决方案, 是一个开放式标准(<a href="https://tools.ietf.org/html/rfc7519">RFC 7519</a>), 用于在各方之间以JSON对象安全传输信息。我们不记录令牌，所有验证和调试都在客户端进行。</div>
@@ -101,7 +127,11 @@ const JwtParse: React.FC = (props) => {
                     </div>
                 </div>
             </div>
-
+            <div>
+                <span>Unix时间戳：</span>
+                <input onChange={onChange}></input>
+                <span>格式化后时间戳：{formattedTime}</span>
+            </div>
         </div>
     );
 }

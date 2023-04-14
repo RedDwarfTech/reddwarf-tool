@@ -1,7 +1,9 @@
-import { Breadcrumb, Checkbox, Input } from "antd";
+import { Breadcrumb, Button, Checkbox, Input } from "antd";
 import { useState } from "react";
 import './Yaml.css'
 import { JsonViewer } from '@textea/json-viewer';
+import { yamlToJson,jsonToProperties } from "@/service/yaml/YamlService";
+
 
 const Yaml: React.FC = (props) => {
     var Buffer = require('buffer/').Buffer
@@ -35,7 +37,13 @@ const Yaml: React.FC = (props) => {
     }
 
     const convertYamlToProperties = () => {
-        return (<div></div>);
+        const jsonString = yamlToJson(inputValue);
+        const properties = jsonToProperties(jsonString as Object,'');
+        return (
+            <div>
+                <pre>{properties}</pre>
+            </div>
+        );
     }
 
     return (
@@ -63,6 +71,7 @@ const Yaml: React.FC = (props) => {
                     </div>
                     <Input.TextArea onChange={handleChange}></Input.TextArea>
                 </div>
+                <Button onClick={convertYamlToProperties}>转换</Button>
                 <div className="jwt-parse-dist">
                     <div style={{ fontSize: '15px' }}>转换结果</div>
                     <div className="jwt-parse-result">

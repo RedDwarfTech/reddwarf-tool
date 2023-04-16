@@ -2,7 +2,7 @@ import { Breadcrumb, Button, Checkbox, Input } from "antd";
 import { useState } from "react";
 import './Yaml.css'
 import { JsonViewer } from '@textea/json-viewer';
-import { yamlToJson,jsonToProperties } from "@/service/yaml/YamlService";
+import { yamlToJson, jsonToProperties, parseProperties, stringifyYaml } from "@/service/yaml/YamlService";
 
 
 const Yaml: React.FC = (props) => {
@@ -22,9 +22,11 @@ const Yaml: React.FC = (props) => {
 
     const renderParsed = () => {
         if (inputValue && inputValue.length > 0) {
-            if(selectTrans === 'yp'){
+            if (selectTrans === 'yp') {
                 return convertYamlToProperties();
-            }else{
+            } else if (selectTrans === 'py') {
+                return convertPropertiesToYml();
+            } else {
                 var payload = parseJwt(inputValue);
                 return (<div className="jwt-payload"><JsonViewer value={payload} /></div>);
             }
@@ -36,9 +38,19 @@ const Yaml: React.FC = (props) => {
         setSelectTrans(checked);
     }
 
+    const convertPropertiesToYml = () => {
+        const config = parseProperties(inputValue);
+        const yamlStr = stringifyYaml(config);
+        return (
+            <div>
+                <pre>{yamlStr}</pre>
+            </div>
+        );
+    }
+
     const convertYamlToProperties = () => {
         const jsonString = yamlToJson(inputValue);
-        const properties = jsonToProperties(jsonString as Object,'');
+        const properties = jsonToProperties(jsonString as Object, '');
         return (
             <div>
                 <pre>{properties}</pre>
@@ -49,14 +61,14 @@ const Yaml: React.FC = (props) => {
     return (
         <div className="yaml-container">
             <Breadcrumb items={[
-                    {
-                        title: '首页',
-                        href: '/'
-                    },
-                    {
-                        title: 'Yaml转换',
-                    }
-                ]}>
+                {
+                    title: '首页',
+                    href: '/'
+                },
+                {
+                    title: 'Yaml转换',
+                }
+            ]}>
             </Breadcrumb>
             <h3>Yaml转换</h3>
             <div className="jwt-parse-tips jwt-parse-tips-danger"><strong>提示：</strong>Yaml及其他相互转换的所有步骤都在客户端进行，请放心使用。</div>

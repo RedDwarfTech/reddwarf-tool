@@ -7,7 +7,6 @@ const { Paragraph} = Typography;
 const About: React.FC = (props) => {
   return (
     <div className="about-container">
-      <h4>dddddddd</h4>
       <div className="about-intro">
       这是一个在线编程工具网站，可以方便开发人员进行各种编程相关的操作。这个网站集合了许多实用的小工具，包括代码转换工具、格式化工具、代码压缩工具、字符串处理工具、JSON解析工具、正则表达式测试工具等等。
 

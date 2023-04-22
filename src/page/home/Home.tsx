@@ -9,6 +9,7 @@ import JsonTool from "../tool/json/JsonTool";
 import JwtParse from "../tool/jwt/JwtParse";
 import Yaml from "../tool/yaml/Yaml";
 import "./Home.css";
+import Regex from "../tool/regex/Regex";
 
 const Home: React.FC = (props) => {
 
@@ -49,6 +50,10 @@ const Home: React.FC = (props) => {
                         <div className="tool-title">Json工具</div>
                         <div>Json格式化校验</div>
                     </Card.Grid>
+                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "regex")}>
+                        <div className="tool-title">正则表达式</div>
+                        <div>正则表达式</div>
+                    </Card.Grid>
                 </Card>
             );
         } else if (showPage === 'crontab') {
@@ -63,6 +68,8 @@ const Home: React.FC = (props) => {
             return (<Yaml></Yaml>);
         } else if (showPage === 'json') {
             return (<JsonTool></JsonTool>);
+        } else if (showPage === 'regex') {
+            return (<Regex></Regex>);
         } else {
             return (<div></div>);
         }

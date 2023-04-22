@@ -1,0 +1,38 @@
+.regex-center-body {
+    width:100%;
+}
+
+.regex-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.regex-container-oper {
+    display: flex;
+    flex-direction: column;
+}
+
+.regex-container-tips {
+    margin-left: 30px;
+}
+
+.regex-input{
+    height: 30px;
+    
+}
+
+.match-context {
+    height: 100px; 
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+.match-result {
+    height: 100px;
+    line-height: 1.5; 
+    margin-top: 10px;
+}
+
+.regex-item {
+    font-size: 16px;
+}

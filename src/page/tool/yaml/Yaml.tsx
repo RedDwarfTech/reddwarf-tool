@@ -2,7 +2,7 @@ import { Breadcrumb, Button, Checkbox, Input } from "antd";
 import { useState } from "react";
 import './Yaml.css'
 import { JsonViewer } from '@textea/json-viewer';
-import { yamlToJson, jsonToProperties, parseProperties, stringifyYaml } from "@/service/yaml/YamlService";
+import { yamlToJson, jsonToProperties, parseProperties, stringifyYaml } from "@/service/tool/yaml/YamlService";
 
 
 const Yaml: React.FC = (props) => {

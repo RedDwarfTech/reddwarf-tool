@@ -1,4 +1,4 @@
-import { Breadcrumb, Input, Image } from "antd";
+import { Breadcrumb, Input } from "antd";
 import { useState } from "react";
 import './JwtParse.css'
 import { JsonViewer,createDataType } from '@textea/json-viewer';
@@ -38,7 +38,6 @@ const JwtParse: React.FC = (props) => {
                 return (<div className="jwt-payload"><JsonViewer rootName={false} value={payload} /></div>);
             }
         } catch (e) {
-
         }
         return (<div></div>);
     }

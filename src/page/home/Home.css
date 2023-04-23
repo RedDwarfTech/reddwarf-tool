@@ -26,4 +26,11 @@
 .tool-title{
     font-size: 16px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.tool-title img {
+    margin-right: 6px;
+    margin-bottom: 5px;
 }

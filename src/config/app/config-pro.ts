@@ -1,10 +1,9 @@
 let proConfigMap = new Map([
-  ["wssUrl", "wss://ai.poemhub.top/post/websocket"],
-  ["logoutUrl", "https://ai.poemhub.top"],
-  ["baseAuthUrl","https://ai.poemhub.top"],
-  ["accessTokenUrlPath","/ai/auth/access-token/refresh"],
-  ["appHome","https://ai.poemhub.top"],
-  ["appId" , "vOghoo10L9"]
+  ["logoutUrl", "https://tool.poemhub.top"],
+  ["baseAuthUrl","https://tool.poemhub.top"],
+  ["accessTokenUrlPath","/tool/auth/access-token/refresh"],
+  ["appHome","https://tool.poemhub.top"],
+  ["appId" , "iYDFo0PQQX"]
 ]); 
 
 export default proConfigMap;

@@ -1,5 +1,5 @@
-import { Avatar, Button, Dropdown, Menu } from "antd";
-import React, { useEffect, useState } from "react";
+import { Avatar, Button, Dropdown } from "antd";
+import React, { useState } from "react";
 import type { MenuProps } from 'antd';
 import "./ToolHeader.css"
 import { doLoginOut, getCurrentUser, userLoginImpl } from "@/service/user/UserService";
@@ -30,10 +30,6 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     });
   }
 
-  const showUserProfile = () => {
-    handleMenuClick('profile');
-  }
-
   const items: MenuProps['items'] = [
     {
       key: '2',
@@ -41,14 +37,6 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
       label: (
         <a>
           登出
-        </a>
-      )
-    }, {
-      key: '3',
-      onClick: showUserProfile,
-      label: (
-        <a>
-          控制台
         </a>
       )
     }]

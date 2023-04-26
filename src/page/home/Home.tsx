@@ -16,6 +16,8 @@ import yamlImg from "@/asset/icon/yaml.jpeg";
 import jsonImg from "@/asset/icon/json.jpeg";
 import regexImg from "@/asset/icon/regex.png";
 import RemoveBackground from "../tool/rembg/RemoveBackground";
+import Password from "antd/es/input/Password";
+import PasswordTool from "../tool/pwd/PasswordTool";
 
 const Home: React.FC = (props) => {
 
@@ -81,6 +83,13 @@ const Home: React.FC = (props) => {
                         </div>
                         <div>一键抠图</div>
                     </Card.Grid>
+                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "pwd")}>
+                        <div className="tool-title">
+                            <img width={35} height={35} src={regexImg}/>
+                            <div>密码工具</div>
+                        </div>
+                        <div>密码工具</div>
+                    </Card.Grid>
                 </Card>
             );
         } else if (showPage === 'crontab') {
@@ -99,11 +108,12 @@ const Home: React.FC = (props) => {
             return (<Regex></Regex>);
         } else if (showPage === 'rembg') {
             return (<RemoveBackground></RemoveBackground>);
+        }else if (showPage === 'pwd') {
+            return (<PasswordTool></PasswordTool>);
         }else {
             return (<div></div>);
         }
     }
-
 
     return (
         <div>
@@ -116,7 +126,6 @@ const Home: React.FC = (props) => {
                 <div className="right"></div>
             </div>
         </div>
-
     );
 }
 

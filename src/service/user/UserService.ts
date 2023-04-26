@@ -1,7 +1,8 @@
 import { WheelGlobal } from 'js-wheel';
 import { getCurrentUserAction, userLogin } from '@/redux/action/user/UserAction';
-import { requestWithAction } from '@/common/XHRClient';
+import { requestWithAction, requestWithActionType } from '@/common/XHRClient';
 import { readConfig } from '@/config/app/config-reader';
+import { UserActionType } from 'js-wheel/dist/src/action/UserAction';
 
 export function getCurrentUser() {
     const config = {
@@ -20,6 +21,17 @@ export function userLoginImpl(params: any) {
         params: params
     };
     return requestWithAction(config, userLogin);
+}
+
+export function userLoginByPhoneImpl(params: any) {
+    const config = {
+        method: 'post',
+        url: '/tool/user/login',
+        headers: {'Content-Type': 'application/json'},
+        data: JSON.stringify(params)
+    };
+    const actionTypeString: string = UserActionType[UserActionType.LOGIN_BY_PHONE];
+    return requestWithActionType(config, actionTypeString);
 }
 
 export function isLoggedIn(){

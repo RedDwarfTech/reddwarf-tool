@@ -4,7 +4,7 @@ import { PhotoActionType } from "@/redux/action/rembg/PhotoAction";
 export function uploadBackgroundImage(params: any){
     const config = {
         method: 'post',
-        url: '/post/user/current-user',
+        url: '/tool/photo/rembg',
         headers: {'Content-Type': 'application/json'},
         data: JSON.stringify(params)
     };

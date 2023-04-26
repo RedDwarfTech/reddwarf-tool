@@ -15,6 +15,7 @@ import cronImg from "@/asset/icon/crontab.jpeg";
 import yamlImg from "@/asset/icon/yaml.jpeg";
 import jsonImg from "@/asset/icon/json.jpeg";
 import regexImg from "@/asset/icon/regex.png";
+import RemoveBackground from "../tool/rembg/RemoveBackground";
 
 const Home: React.FC = (props) => {
 
@@ -73,6 +74,13 @@ const Home: React.FC = (props) => {
                         </div>
                         <div>正则表达式</div>
                     </Card.Grid>
+                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "rembg")}>
+                        <div className="tool-title">
+                            <img width={35} height={35} src={regexImg}/>
+                            <div>一键抠图</div>
+                        </div>
+                        <div>一键抠图</div>
+                    </Card.Grid>
                 </Card>
             );
         } else if (showPage === 'crontab') {
@@ -89,7 +97,9 @@ const Home: React.FC = (props) => {
             return (<JsonTool></JsonTool>);
         } else if (showPage === 'regex') {
             return (<Regex></Regex>);
-        } else {
+        } else if (showPage === 'rembg') {
+            return (<RemoveBackground></RemoveBackground>);
+        }else {
             return (<div></div>);
         }
     }

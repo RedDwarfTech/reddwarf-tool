@@ -16,7 +16,6 @@ import yamlImg from "@/asset/icon/yaml.jpeg";
 import jsonImg from "@/asset/icon/json.jpeg";
 import regexImg from "@/asset/icon/regex.png";
 import RemoveBackground from "../tool/rembg/RemoveBackground";
-import Password from "antd/es/input/Password";
 import PasswordTool from "../tool/pwd/PasswordTool";
 
 const Home: React.FC = (props) => {

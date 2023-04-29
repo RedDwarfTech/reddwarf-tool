@@ -1,5 +1,5 @@
 import { Avatar, Card, Col, Row } from "antd";
-import { IUserModel, TimeUtils } from "js-wheel";
+import { IUserModel } from "js-wheel";
 import React, { useState } from "react";
 import "./Profile.css";
 import alipayPic from "@/asset/icon/alipay-circle.png";
@@ -7,6 +7,7 @@ import Feedback from "./feedback/Feedback";
 import withConnect from "@/component/hoc/withConnect";
 import { getCurrentUser } from "@/service/user/UserService";
 import { useSelector } from "react-redux";
+import { UserProfile } from "rd-component";
 
 export type ProfileProps = {
   panelUserInfo: IUserModel | undefined;
@@ -38,14 +39,6 @@ const Profile: React.FC = (props: any) => {
     }
   }
 
-  const getVipExpiredTime = (userInfo: any) => {
-    if (userInfo && userInfo.autoRenewProductExpireTimeMs && userInfo.autoRenewProductExpireTime > new Date().getTime()) {
-      return TimeUtils.getFormattedTime(Number(userInfo.autoRenewProductExpireTimeMs));
-    } else {
-      return "--";
-    }
-  }
-
   const renderPanelContent = () => {
     if (currentPanel && currentPanel === 'feedback') {
       return <Feedback></Feedback>
@@ -60,7 +53,7 @@ const Profile: React.FC = (props: any) => {
           </Row>
           <Row style={{ marginTop: '10px', marginBottom: '10px' }}>
             <Col span={8}><span className="user-info">会员到期日</span></Col>
-            <Col span={8}><span className="user-info">{getVipExpiredTime(userInfo)}</span></Col>
+            <Col span={8}><span className="user-info">{userInfo?UserProfile.getVipExpiredTime(userInfo):"--"}</span></Col>
             <Col span={8}></Col>
           </Row>
         </Card>

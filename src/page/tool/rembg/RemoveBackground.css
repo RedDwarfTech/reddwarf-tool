@@ -1,6 +1,13 @@
 .rembg-upload {
     border: 2px dashed #ccc;
     padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rembg-body {
+    width: 100%;
 }
 
 .original-bg {
@@ -14,6 +21,11 @@
     color: #666;
     text-decoration: none;
     padding: 4px;
+    margin-right: 10px;
+}
+
+.original-bg-active {
+    border-color: blue
 }
 
 .bg-red {
@@ -27,6 +39,10 @@
     color: #666;
     text-decoration: none;
     padding: 4px;
+}
+
+.bg-red-active {
+    border-color: blue
 }
 
 .rembg-params {

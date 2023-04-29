@@ -8,7 +8,7 @@ const PayReducer = (state=initState, action:any) => {
         case "CREATE_ORDER":
             return {
                 ...state,
-                formText: action.formText 
+                formText: action.data 
             };
         default:
             break;

@@ -1,9 +1,8 @@
+import { AppState } from '@/redux/store/AppState';
 import { connect } from 'react-redux';
-import { AppState } from '../types/AppState'; // 导入AppState
 
 // mapStateToProps 函数
 const mapStateToProps = (state: AppState) => ({
-  robot: state.robot,
 });
 
 // mapDispatchToProps 函数

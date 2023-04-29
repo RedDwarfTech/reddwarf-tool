@@ -1,12 +1,12 @@
-import { Avatar, Button, Dropdown } from "antd";
+import { Avatar, Button } from "antd";
 import React, { useEffect, useState } from "react";
-import type { MenuProps } from 'antd';
 import "./ToolHeader.css"
 import { doLoginOut, getCurrentUser, userLoginByPhoneImpl, userLoginImpl } from "@/service/user/UserService";
-import { IUserModel, WheelGlobal } from "js-wheel";
+import { IUserModel, WheelGlobal, AuthHandler } from "js-wheel";
 import { readConfig } from "@/config/app/config-reader";
-import withConnect from "@/redux/hoc/withConnect";
 import { useSelector } from "react-redux";
+import withConnect from "../hoc/withConnect";
+import { ControlOutlined, LogoutOutlined } from "@ant-design/icons";
 
 export type HeaderFormProps = {
   onMenuClick: (menu: String) => void;
@@ -17,14 +17,31 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || false);
   const [isGetUserLoading, setIsGetUserLoading] = useState(false);
   const [userInfo, setUserInfo] = useState<IUserModel>();
-  const { loginUser }  = useSelector((state: any) => state.user);
+  const { loginUser } = useSelector((state: any) => state.user);
 
   useEffect(() => {
-    if(loginUser && Object.keys(loginUser).length > 0) {
+    if (loginUser && Object.keys(loginUser).length > 0) {
       saveLoginUserInfo(loginUser);
     }
   }, [loginUser]);
 
+  React.useEffect(() => {
+    document.addEventListener("click", handleMenuClose);
+    return () => {
+      document.removeEventListener("click", handleMenuClose);
+    };
+  },[]);
+
+  const handleMenuClose = (event: any) => {
+    const menu = document.getElementById('user-menu');
+    const dropdown = document.getElementById('dropdown');
+    if (menu && dropdown) {
+      const target = event.target;
+      if (!menu.contains(target)) {
+        dropdown.style.display = 'none';
+      }
+    }
+  }
 
   const saveLoginUserInfo = (userInfo: any) => {
     localStorage.setItem('isLoggedIn', 'true');
@@ -36,7 +53,7 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     loadCurrentUser();
     setIsLoggedIn(true);
   }
-  
+
   const handleMenuClick = (menu: string) => {
     props.onMenuClick(menu);
   };
@@ -63,46 +80,37 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     }
   }
 
-  const items: MenuProps['items'] = [
-    {
-      key: '2',
-      onClick: doLoginOut,
-      label: (
-        <a>
-          登出
-        </a>
-      )
-    }]
 
+  const avatarClick = () => {
+    const dropdown = document.getElementById("dropdown");
+    if (dropdown) {
+      if (dropdown.style.display == "none" || dropdown.style.display == "") {
+        dropdown.style.display = "block";
+      } else {
+        dropdown.style.display = "none";
+      }
+    }
+  }
+
+  const showUserProfile = () => {
+    handleMenuClick('profile');
+  }
 
   const renderLogin = () => {
     if (isLoggedIn) {
       var avatarUrl = localStorage.getItem('avatarUrl');
-      if (avatarUrl) {
-        return (<a>
-          <Dropdown menu={{ items }} trigger={['click']}>
-            <Avatar size={40} src={avatarUrl} />
-          </Dropdown>
+      return (
+        <a id ="user-menu">
+          {avatarUrl ? <Avatar size={40} src={avatarUrl} onClick={avatarClick} /> : <Avatar size={40} >Me</Avatar>}
+          <div id="dropdown" className="dropdown-content">
+            <div onClick={showUserProfile}><ControlOutlined /><span>控制台</span></div>
+            <div onClick={doLoginOut}><LogoutOutlined /><span>登出</span></div>
+          </div>
         </a>);
-      } else {
-        return (<a>
-          <Dropdown menu={{ items }} trigger={['click']}>
-            <Avatar size={40} >Me</Avatar>
-          </Dropdown>
-        </a>);
-      }
     }
     const accessTokenOrigin = document.cookie.split('; ').find(row => row.startsWith('accessToken='));
     if (accessTokenOrigin) {
-      const accessTokenCookie = accessTokenOrigin.split("=")[1];
-      const refreshTokenCookie = document.cookie.split('; ').find(row => row.startsWith('refreshToken='))?.split("=")[1];
-      const avatarUrlCookie = document.cookie.split('; ').find(row => row.startsWith('avatarUrl='))?.split("=")[1];
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem(WheelGlobal.ACCESS_TOKEN_NAME, accessTokenCookie);
-      localStorage.setItem(WheelGlobal.REFRESH_TOKEN_NAME, refreshTokenCookie ? refreshTokenCookie : "");
-      localStorage.setItem('avatarUrl', avatarUrlCookie ? avatarUrlCookie : "");
-      localStorage.setItem(WheelGlobal.BASE_AUTH_URL, readConfig("baseAuthUrl"));
-      localStorage.setItem(WheelGlobal.ACCESS_TOKEN_URL_PATH, readConfig("accessTokenUrlPath"));
+      AuthHandler.storeUserAuthInfo(accessTokenOrigin, readConfig("baseAuthUrl"), readConfig("accessTokenUrlPath"));
       loadCurrentUser();
       setIsLoggedIn(true);
     }
@@ -121,9 +129,10 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
   }
 
   return (<header>
-    <div>
+    <div className="header-container">
       <nav>
         <a onClick={() => handleMenuClick('tools')}>工具</a>
+        <a onClick={() => handleMenuClick('vip')}>订阅</a>
         <a onClick={() => handleMenuClick('about')}>关于</a>
         {renderLogin()}
       </nav>

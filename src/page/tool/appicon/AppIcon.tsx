@@ -1,8 +1,8 @@
-import withConnect from "@/redux/hoc/withConnect";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Upload, UploadFile } from "antd";
 import { useState } from "react";
 import './AppIcon.css'
+import withConnect from "@/component/hoc/withConnect";
 
 const AppIcon: React.FC = (props) => {
 

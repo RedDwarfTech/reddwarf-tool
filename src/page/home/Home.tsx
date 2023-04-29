@@ -1,5 +1,4 @@
 import ToolHeader from "@/component/header/ToolHeader";
-import withConnect from "@/redux/hoc/withConnect";
 import { Card } from "antd";
 import { useState } from "react";
 import About from "../about/About";
@@ -17,6 +16,11 @@ import jsonImg from "@/asset/icon/json.jpeg";
 import regexImg from "@/asset/icon/regex.png";
 import RemoveBackground from "../tool/rembg/RemoveBackground";
 import PasswordTool from "../tool/pwd/PasswordTool";
+import GenerateEntity from "../tool/entity-gen/GenerateEntity";
+import withConnect from "@/component/hoc/withConnect";
+import Goods from "../goods/Goods";
+import Profile from "../user/profile/Profile";
+import React from "react";
 
 const Home: React.FC = (props) => {
 
@@ -37,60 +41,75 @@ const Home: React.FC = (props) => {
         marginTop: '20px',
     };
 
+    const renderTools = () => {
+        return (
+            <Card className="tool-card" title="小工具">
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "jwt")}>
+                    <div className="tool-title">
+                        <img width={30} height={30} src={jwtImg}/><div>JWT解析</div>
+                    </div>
+                    <div>查看JSON Web Tokens的内容</div>
+                </Card.Grid>
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "crontab")}>
+                    <div className="tool-title">
+                        <img width={35} height={35} src={cronImg}/>
+                        <div>Crontab时间计算</div>
+                    </div>
+                    <div>cron表达式执行时间计算</div>
+                </Card.Grid>
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "yaml")}>
+                    <div className="tool-title">
+                        <img width={35} height={35} src={yamlImg}/>
+                        <div>Yaml工具</div>
+                    </div>
+                    <div>Yaml与其他格式的互转</div>
+                </Card.Grid>
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "json")}>
+                    <div className="tool-title">
+                        <img width={35} height={35} src={jsonImg}/>
+                        <div>Json工具</div>
+                    </div>
+                    <div>Json格式化校验</div>
+                </Card.Grid>
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "regex")}>
+                    <div className="tool-title">
+                        <img width={35} height={35} src={regexImg}/>
+                        <div>正则表达式</div>
+                    </div>
+                    <div>正则表达式</div>
+                </Card.Grid>
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "rembg")}>
+                    <div className="tool-title">
+                        <img width={35} height={35} src={regexImg}/>
+                        <div>一键抠图</div>
+                    </div>
+                    <div>一键抠图</div>
+                </Card.Grid>
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "pwd")}>
+                    <div className="tool-title">
+                        <img width={35} height={35} src={regexImg}/>
+                        <div>密码工具</div>
+                    </div>
+                    <div>密码工具</div>
+                </Card.Grid>
+                <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "entity")}>
+                    <div className="tool-title">
+                        <img width={35} height={35} src={regexImg}/>
+                        <div>生成实体</div>
+                    </div>
+                    <div>生成实体</div>
+                </Card.Grid>
+            </Card>
+        );
+    }
+
     const renderContainer = () => {
         if (showPage === 'tools') {
-            return (
-                <Card className="tool-card" title="小工具">
-                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "jwt")}>
-                        <div className="tool-title">
-                            <img width={30} height={30} src={jwtImg}/><div>JWT解析</div>
-                        </div>
-                        <div>查看JSON Web Tokens的内容</div>
-                    </Card.Grid>
-                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "crontab")}>
-                        <div className="tool-title">
-                            <img width={35} height={35} src={cronImg}/>
-                            <div>Crontab时间计算</div>
-                        </div>
-                        <div>cron表达式执行时间计算</div>
-                    </Card.Grid>
-                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "yaml")}>
-                        <div className="tool-title">
-                            <img width={35} height={35} src={yamlImg}/>
-                            <div>Yaml工具</div>
-                        </div>
-                        <div>Yaml与其他格式的互转</div>
-                    </Card.Grid>
-                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "json")}>
-                        <div className="tool-title">
-                            <img width={35} height={35} src={jsonImg}/>
-                            <div>Json工具</div>
-                        </div>
-                        <div>Json格式化校验</div>
-                    </Card.Grid>
-                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "regex")}>
-                        <div className="tool-title">
-                            <img width={35} height={35} src={regexImg}/>
-                            <div>正则表达式</div>
-                        </div>
-                        <div>正则表达式</div>
-                    </Card.Grid>
-                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "rembg")}>
-                        <div className="tool-title">
-                            <img width={35} height={35} src={regexImg}/>
-                            <div>一键抠图</div>
-                        </div>
-                        <div>一键抠图</div>
-                    </Card.Grid>
-                    <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "pwd")}>
-                        <div className="tool-title">
-                            <img width={35} height={35} src={regexImg}/>
-                            <div>密码工具</div>
-                        </div>
-                        <div>密码工具</div>
-                    </Card.Grid>
-                </Card>
-            );
+            return renderTools();
+        } else if(showPage === 'profile'){
+            return <Profile></Profile>
+        } else if(showPage === 'vip'){
+            return <Goods></Goods>
         } else if (showPage === 'crontab') {
             return (<CronTab></CronTab>);
         } else if (showPage === 'appicon') {
@@ -109,6 +128,8 @@ const Home: React.FC = (props) => {
             return (<RemoveBackground></RemoveBackground>);
         }else if (showPage === 'pwd') {
             return (<PasswordTool></PasswordTool>);
+        }else if (showPage === 'entity') {
+            return (<GenerateEntity></GenerateEntity>);
         }else {
             return (<div></div>);
         }

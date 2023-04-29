@@ -1,0 +1,45 @@
+.rembg-upload {
+    border: 2px dashed #ccc;
+    padding: 50px;
+}
+
+.original-bg {
+    background-image: url('../../../asset/image/tool/grid.png');
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    background-size: 24px;
+    color: #666;
+    text-decoration: none;
+    padding: 4px;
+}
+
+.bg-red {
+    background-color: red;
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    background-size: 24px;
+    color: #666;
+    text-decoration: none;
+    padding: 4px;
+}
+
+.rembg-params {
+    margin-top: 20px;
+}
+
+.rembg-params button {
+    margin-top: 20px;
+}
+
+.rembg-result img{
+    width:240px;
+    height: 240px;
+    margin-top: 20px;
+    margin-right: 20px;
+}

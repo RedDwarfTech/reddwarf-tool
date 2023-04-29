@@ -14,6 +14,9 @@ import cronImg from "@/asset/icon/crontab.jpeg";
 import yamlImg from "@/asset/icon/yaml.jpeg";
 import jsonImg from "@/asset/icon/json.jpeg";
 import regexImg from "@/asset/icon/regex.png";
+import remBgImg from "@/asset/icon/rembg.png";
+import pwdImg from "@/asset/icon/pwd.jpeg";
+import codeImg from "@/asset/icon/code.png";
 import RemoveBackground from "../tool/rembg/RemoveBackground";
 import PasswordTool from "../tool/pwd/PasswordTool";
 import GenerateEntity from "../tool/entity-gen/GenerateEntity";
@@ -80,21 +83,21 @@ const Home: React.FC = (props) => {
                 </Card.Grid>
                 <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "rembg")}>
                     <div className="tool-title">
-                        <img width={35} height={35} src={regexImg}/>
+                        <img width={35} height={35} src={remBgImg}/>
                         <div>一键抠图</div>
                     </div>
                     <div>一键抠图</div>
                 </Card.Grid>
                 <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "pwd")}>
                     <div className="tool-title">
-                        <img width={35} height={35} src={regexImg}/>
+                        <img width={35} height={35} src={pwdImg}/>
                         <div>密码工具</div>
                     </div>
                     <div>密码工具</div>
                 </Card.Grid>
                 <Card.Grid style={gridStyle} onClick={(e) => handleToolTitleClick(e, "entity")}>
                     <div className="tool-title">
-                        <img width={35} height={35} src={regexImg}/>
+                        <img width={35} height={35} src={codeImg}/>
                         <div>生成实体</div>
                     </div>
                     <div>生成实体</div>

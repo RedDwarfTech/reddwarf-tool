@@ -77,7 +77,7 @@ const Goods: React.FC = (props: any) => {
   }
 
   return (
-    <div>
+    <div className="product-body">
       <div className="product-container">
         {productSubMenu(products)}
       </div>

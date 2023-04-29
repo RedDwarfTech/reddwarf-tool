@@ -6,7 +6,7 @@ import { IUserModel, WheelGlobal, AuthHandler } from "js-wheel";
 import { readConfig } from "@/config/app/config-reader";
 import { useSelector } from "react-redux";
 import withConnect from "../hoc/withConnect";
-import { ControlOutlined, LogoutOutlined } from "@ant-design/icons";
+import { ControlOutlined, LogoutOutlined, PayCircleOutlined } from "@ant-design/icons";
 
 export type HeaderFormProps = {
   onMenuClick: (menu: String) => void;
@@ -95,6 +95,10 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     handleMenuClick('profile');
   }
 
+  const showSubscribe = () => {
+    handleMenuClick('vip');
+  }
+
   const renderLogin = () => {
     if (isLoggedIn) {
       var avatarUrl = localStorage.getItem('avatarUrl');
@@ -102,6 +106,7 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
         <a id ="user-menu">
           {avatarUrl ? <Avatar size={40} src={avatarUrl} onClick={avatarClick} /> : <Avatar onClick={avatarClick} size={40} >Me</Avatar>}
           <div id="dropdown" className="dropdown-content">
+            <div onClick={showSubscribe}><PayCircleOutlined /><span>订阅</span></div>
             <div onClick={showUserProfile}><ControlOutlined /><span>控制台</span></div>
             <div onClick={doLoginOut}><LogoutOutlined /><span>登出</span></div>
           </div>
@@ -131,7 +136,6 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     <div className="header-container">
       <nav>
         <a onClick={() => handleMenuClick('tools')}>工具</a>
-        <a onClick={() => handleMenuClick('vip')}>订阅</a>
         <a onClick={() => handleMenuClick('about')}>关于</a>
         {renderLogin()}
       </nav>

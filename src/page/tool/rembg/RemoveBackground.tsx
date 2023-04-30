@@ -1,10 +1,12 @@
 import { PhotoResponse } from "@/models/photo/PhotoResponse";
 import { uploadBackgroundImage } from "@/service/tool/rembg/PhotoService";
-import { Breadcrumb, message } from "antd";
+import { Breadcrumb, Button, message } from "antd";
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import "./RemoveBackground.css";
+import { v4 as uuid } from 'uuid';
+import { RdColor } from 'js-wheel';
 
 const fileToBase64 = (file: File): Promise<string> => {
     return new Promise<string>((resolve, reject) => {
@@ -22,6 +24,7 @@ const RemoveBackground: React.FC = (props) => {
     const [imgBg, setImgBg] = useState<string>('origin');
     const [remBgPhoto, setRemBgPhoto] = useState<PhotoResponse>();
     const { photo } = useSelector((state: any) => state.photo);
+    const [bgColor, setBgColor] = useState('#ffffff');
 
     React.useEffect(() => {
         if (photo) {
@@ -63,13 +66,86 @@ const RemoveBackground: React.FC = (props) => {
         return (
             <div className="rembg-result">
                 {imgUrl ? <img alt="原图" src={imgUrl}></img> : <div></div>}
-                {remBgPhoto?.foreground ? <img alt="抠图结果" src={baseUrl}></img> : <div></div>}
+                {remBgPhoto?.foreground ? <img id="removed-img" style={{ backgroundColor: bgColor }} alt="抠图结果" src={baseUrl}></img> : <div></div>}
             </div>
         );
     }
 
     const triggerSelected = (value: string) => {
         setImgBg(value);
+        switch (value) {
+            case 'red':
+                setBgColor('#FF0000');
+                break;
+            case 'blue':
+                setBgColor('#0000FF');
+                break;
+            case 'origin':
+                setBgColor('');
+                break;
+            default:
+                message.warning("不支持的背景颜色");
+                break;
+        }
+    }
+
+    const downloadImpl = () => {
+        const element = document.getElementById('removed-img') as HTMLImageElement;
+        if (!element) {
+            return;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = element.naturalWidth;
+        canvas.height = element.naturalHeight;
+        const context = canvas.getContext('2d');
+        if (!context) {
+            return;
+        }
+        context.drawImage(element as HTMLImageElement, 0, 0, canvas.width, canvas.height);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        if (bgColor !== "origin") {
+            const pixelData = imageData.data;
+
+            // 定义希望替换的背景颜色
+            const rgba = RdColor.colorToRGBA(bgColor);
+            if (!rgba) {
+                message.warning("不支持的背景色");
+                return;
+            }
+            const r = rgba[0];
+            const g = rgba[1];
+            const b = rgba[2];
+
+            // 遍历像素数据，将背景颜色替换为指定颜色
+            for (let i = 0; i < pixelData.length; i += 4) {
+                const red = pixelData[i];
+                const green = pixelData[i + 1];
+                const blue = pixelData[i + 2];
+                const alpha = pixelData[i + 3];
+
+                // 判断当前像素是否为背景颜色
+                if (red === 0 && green === 0 && blue === 0 && alpha === 0) {
+                    pixelData[i] = r;
+                    pixelData[i + 1] = g;
+                    pixelData[i + 2] = b;
+                    pixelData[i + 3] = 255;
+                }
+            }
+        }
+        context.putImageData(imageData, 0, 0);
+        const dataURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'image.png';
+        link.click();
+    }
+
+
+    const renderDownload = () => {
+        return (
+            <div>
+                <Button onClick={downloadImpl}>下载图片</Button>
+            </div>);
     }
 
     return (
@@ -98,10 +174,14 @@ const RemoveBackground: React.FC = (props) => {
                         <a title="红色背景"
                             onClick={() => triggerSelected("red")}
                             className={`bg-red ${imgBg === "red" ? "bg-red-active" : ""}`}></a>
+                        <a title="蓝色背景"
+                            onClick={() => triggerSelected("blue")}
+                            className={`bg-blue ${imgBg === "blue" ? "bg-blue-active" : ""}`}></a>
                     </div>
                     <button onClick={handleUpload}>抠图</button>
                 </div>
                 {renderResult()}
+                {renderDownload()}
             </div>
         </div>
     );

@@ -39,9 +39,27 @@
     color: #666;
     text-decoration: none;
     padding: 4px;
+    margin-right: 10px;
 }
 
 .bg-red-active {
+    border-color: blue
+}
+
+.bg-blue {
+    background-color: blue;
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    background-size: 24px;
+    color: #666;
+    text-decoration: none;
+    padding: 4px;
+}
+
+.bg-blue-active {
     border-color: blue
 }
 

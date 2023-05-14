@@ -26,6 +26,7 @@ import Profile from "../user/profile/Profile";
 import React from "react";
 import { readConfig } from "@/config/app/config-reader";
 import store from "@/redux/store/store";
+import 'rd-component/dist/style.css';
 
 const Home: React.FC = (props) => {
 

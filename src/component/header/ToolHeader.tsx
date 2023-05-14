@@ -30,7 +30,7 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     return () => {
       document.removeEventListener("click", handleMenuClose);
     };
-  },[]);
+  }, []);
 
   const handleMenuClose = (event: any) => {
     const menu = document.getElementById('user-menu');
@@ -91,19 +91,21 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     }
   }
 
-  const showUserProfile = () => {
+  const showUserProfile = (event: any) => {
     handleMenuClick('profile');
+    handleMenuClose(event);
   }
 
-  const showSubscribe = () => {
+  const showSubscribe = (event: any) => {
     handleMenuClick('vip');
+    handleMenuClose(event);
   }
 
   const renderLogin = () => {
     if (isLoggedIn) {
       var avatarUrl = localStorage.getItem('avatarUrl');
       return (
-        <a id ="user-menu">
+        <a id="user-menu">
           {avatarUrl ? <Avatar size={40} src={avatarUrl} onClick={avatarClick} /> : <Avatar onClick={avatarClick} size={40} >Me</Avatar>}
           <div id="dropdown" className="dropdown-content">
             <div onClick={showSubscribe}><PayCircleOutlined /><span>订阅</span></div>
@@ -114,7 +116,7 @@ const ToolHeader: React.FC<HeaderFormProps> = (props) => {
     }
     const accessTokenOrigin = document.cookie.split('; ').find(row => row.startsWith('accessToken='));
     if (accessTokenOrigin) {
-      AuthHandler.storeUserAuthInfo(accessTokenOrigin, readConfig("baseAuthUrl"), readConfig("accessTokenUrlPath"));
+      AuthHandler.storeCookieAuthInfo(accessTokenOrigin, readConfig("baseAuthUrl"), readConfig("accessTokenUrlPath"));
       loadCurrentUser();
       setIsLoggedIn(true);
     }

@@ -105,8 +105,6 @@ const RemoveBackground: React.FC = (props) => {
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         if (bgColor !== "origin") {
             const pixelData = imageData.data;
-
-            // 定义希望替换的背景颜色
             const rgba = RdColor.colorToRGBA(bgColor);
             if (!rgba) {
                 message.warning("不支持的背景色");
@@ -115,8 +113,6 @@ const RemoveBackground: React.FC = (props) => {
             const r = rgba[0];
             const g = rgba[1];
             const b = rgba[2];
-
-            // 遍历像素数据，将背景颜色替换为指定颜色
             for (let i = 0; i < pixelData.length; i += 4) {
                 const red = pixelData[i];
                 const green = pixelData[i + 1];

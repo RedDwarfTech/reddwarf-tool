@@ -21,9 +21,11 @@ import RemoveBackground from "../tool/rembg/RemoveBackground";
 import PasswordTool from "../tool/pwd/PasswordTool";
 import GenerateEntity from "../tool/entity-gen/GenerateEntity";
 import withConnect from "@/component/hoc/withConnect";
-import Goods from "../goods/Goods";
+import { Goods } from "rd-component";
 import Profile from "../user/profile/Profile";
 import React from "react";
+import { readConfig } from "@/config/app/config-reader";
+import store from "@/redux/store/store";
 
 const Home: React.FC = (props) => {
 
@@ -112,7 +114,7 @@ const Home: React.FC = (props) => {
         } else if(showPage === 'profile'){
             return <Profile></Profile>
         } else if(showPage === 'vip'){
-            return <Goods></Goods>
+            return <Goods appId ={readConfig("appId")} store={store}></Goods>
         } else if (showPage === 'crontab') {
             return (<CronTab></CronTab>);
         } else if (showPage === 'appicon') {
